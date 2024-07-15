@@ -27,4 +27,10 @@ public class TxController {
         txService.addTransaction(dto.getTransaction());
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{txId}")
+    private ResponseEntity<Void> deleteTransaction(@PathVariable String txId) {
+        txService.deleteTransaction(txId);
+        return ResponseEntity.noContent().build();
+    }
 }

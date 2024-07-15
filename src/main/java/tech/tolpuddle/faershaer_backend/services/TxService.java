@@ -5,6 +5,7 @@ import tech.tolpuddle.faershaer_backend.domain.Transaction;
 import tech.tolpuddle.faershaer_backend.domain.TxDbRepo;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class TxService {
@@ -20,5 +21,9 @@ public class TxService {
 
     public void addTransaction(Transaction transaction) {
         repo.save(transaction);
+    }
+
+    public void deleteTransaction(String txId) {
+        repo.deleteById(txId);
     }
 }
