@@ -8,7 +8,9 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String payer;
+
+    @ManyToOne
+    private Person payer;
     private String expense;
     private Double sum;
 
@@ -20,11 +22,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getPayer() {
+    public Person getPayer() {
         return payer;
     }
 
-    public void setPayer(String payer) {
+    public void setPayer(Person payer) {
         this.payer = payer;
     }
 
