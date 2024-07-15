@@ -1,0 +1,10 @@
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('1', 'John', 'Parking', 10.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('2', 'Alice', 'Snacks', 20.75);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('3', 'Bob', 'Entrance Fee', 30.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('4', 'Sara', 'Drinks', 15.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('5', 'Mike', 'Ice Cream', 7.5);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('6', 'John', 'Sunscreen', 8.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('7', 'Alice', 'Picnic Supplies', 25.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('8', 'Bob', 'Souvenirs', 12.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('9', 'Sara', 'Games', 5.0);
+INSERT INTO transactions (id, payer, expense, sum) VALUES ('10', 'Mike', 'Parking', 10.0);
