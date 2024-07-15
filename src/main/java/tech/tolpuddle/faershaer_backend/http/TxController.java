@@ -1,10 +1,8 @@
 package tech.tolpuddle.faershaer_backend.http;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.domain.Transaction;
-import tech.tolpuddle.faershaer_backend.domain.TxDbRepo;
 import tech.tolpuddle.faershaer_backend.services.TxService;
 
 import java.util.List;
@@ -22,5 +20,11 @@ public class TxController {
     @GetMapping
     public List<Transaction> getTransactions() {
         return txService.getAllTransactions();
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addTransaction(@RequestBody TransactionDto dto) {
+        txService.addTransaction(dto.getTransaction());
+        return ResponseEntity.ok().build();
     }
 }

@@ -17,4 +17,8 @@ public class TxService {
     public List<Transaction> getAllTransactions() {
         return repo.findAll();
     }
+
+    public void addTransaction(Transaction transaction) {
+        repo.save(transaction);
+    }
 }
