@@ -1,12 +1,11 @@
 package tech.tolpuddle.faershaer_backend.http;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.services.PersonService;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,5 +22,11 @@ public class PersonController {
     @GetMapping
     public List<Person> getPersons() {
         return service.getAllPersons();
+    }
+
+    @PostMapping
+    private ResponseEntity<Void> addPerson(@RequestBody String name) {
+        service.addPerson(name);
+        return ResponseEntity.created(URI.create("/persons")).build();
     }
 }

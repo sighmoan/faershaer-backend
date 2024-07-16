@@ -18,4 +18,10 @@ public class PersonService {
     public List<Person> getAllPersons() {
         return repo.findAll();
     }
+
+    public void addPerson(String name) {
+        Person p = new Person();
+        p.setName(name);
+        repo.save(p);
+    }
 }
