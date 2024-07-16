@@ -1,3 +1,5 @@
 spring:
   config:
     import: optional:file:.env.staging[.properties]
+  datasource:
+    url: jdbc:sqlserver://faershaer-db-server.database.windows.net:1433;database=stagingdb;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
