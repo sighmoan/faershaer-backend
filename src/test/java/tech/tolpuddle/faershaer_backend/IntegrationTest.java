@@ -113,4 +113,58 @@ public class IntegrationTest {
             fail(ex.getMessage());
         }
     }
+
+    @Test
+    void shouldProvideTotalsWhenGettingPeople() {
+        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+
+        try {
+            mockMvc.perform(get)
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.length()", is(5)))
+                    .andExpect(jsonPath("$.[0].name", is("Jean")))
+                    .andExpect(jsonPath("$.[0].balance", is(18.0)));
+        } catch(Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldAddPerson() {
+        String nameToAdd = "Sylvain";
+
+        RequestBuilder post = MockMvcRequestBuilders.post(PERSONS_ENDPOINT)
+                .contentType(MediaType.TEXT_PLAIN)
+                .content(nameToAdd);
+
+        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+
+        try {
+            mockMvc.perform(post)
+                    .andExpect(status().isCreated());
+
+            mockMvc.perform(get)
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.length()", is(6)))
+                    .andExpect(jsonPath("$.[5].name", is("Sylvain")));
+        } catch(Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldNotAddPersonWithConflictingName() {
+        String nameToAdd = "Jean";
+
+        RequestBuilder post = MockMvcRequestBuilders.post(PERSONS_ENDPOINT)
+                .contentType(MediaType.TEXT_PLAIN)
+                .content(nameToAdd);
+
+        try {
+            mockMvc.perform(post)
+                    .andExpect(status().isConflict());
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
 }
