@@ -13,7 +13,7 @@ public class Person {
 
     String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "payer")
     List<Transaction> transactions;
 
     public String getId() {
