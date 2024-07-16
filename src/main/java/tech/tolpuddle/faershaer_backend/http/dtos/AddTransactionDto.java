@@ -1,4 +1,4 @@
-package tech.tolpuddle.faershaer_backend.http;
+package tech.tolpuddle.faershaer_backend.http.dtos;
 
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.Transaction;

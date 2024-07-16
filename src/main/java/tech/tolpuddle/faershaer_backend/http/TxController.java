@@ -2,7 +2,8 @@ package tech.tolpuddle.faershaer_backend.http;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.tolpuddle.faershaer_backend.domain.Transaction;
+import tech.tolpuddle.faershaer_backend.http.dtos.AddTransactionDto;
+import tech.tolpuddle.faershaer_backend.http.dtos.TransactionDto;
 import tech.tolpuddle.faershaer_backend.services.TxService;
 
 import java.util.List;
