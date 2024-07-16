@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,8 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.hasLength;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -54,6 +54,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldCreateTransaction() {
         String txToAdd = "{\n" +
                 "\t\"payer\": \"Slippin' Jimmy\",\n" +
@@ -73,6 +74,24 @@ public class IntegrationTest {
                     .andExpect(jsonPath("$.[8].payer", is("Slippin' Jimmy")))
                     .andExpect(jsonPath("$.[8].expense", is("Chicago Sunroof")))
                     .andExpect(jsonPath("$.[8].sum", is(4.20)));
+        } catch(Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    @DirtiesContext
+    void shouldDeleteTransaction() {
+        RequestBuilder delete = MockMvcRequestBuilders.delete("/1");
+        RequestBuilder get = MockMvcRequestBuilders.get("/");
+        try {
+            mockMvc.perform(delete)
+                    .andExpect(status().isNoContent());
+
+            mockMvc.perform(get)
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.length()", is(7)))
+                    .andExpect(jsonPath("$.[0].payer", not(is("Jean"))));
         } catch(Exception ex) {
             fail(ex.getMessage());
         }
