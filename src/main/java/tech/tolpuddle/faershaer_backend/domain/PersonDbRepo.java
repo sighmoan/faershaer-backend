@@ -1,4 +1,7 @@
 package tech.tolpuddle.faershaer_backend.domain;
 
-public class PersonDbRepo {
+import org.springframework.data.repository.ListCrudRepository;
+
+public interface PersonDbRepo extends ListCrudRepository<Person, String> {
+    Person findByName(String name);
 }

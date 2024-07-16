@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class IntegrationTest {
 
     final String TRANSACTIONS_ENDPOINT = "/transactions";
+    final String PERSONS_ENDPOINT = "/persons";
 
     @Autowired
     WebApplicationContext context;
@@ -94,6 +95,20 @@ public class IntegrationTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()", is(7)))
                     .andExpect(jsonPath("$.[0].payer", not(is("Jean"))));
+        } catch(Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldGetPersons() {
+        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+
+        try {
+            mockMvc.perform(get)
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.length()", is(5)))
+                    .andExpect(jsonPath("$.[0].name", is("Jean")));
         } catch(Exception ex) {
             fail(ex.getMessage());
         }
