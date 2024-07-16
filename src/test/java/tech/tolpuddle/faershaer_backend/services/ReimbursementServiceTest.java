@@ -21,6 +21,8 @@ class ReimbursementServiceTest {
 
     @Mock
     TxService txService;
+    @Mock
+    PersonService personService;
     @InjectMocks
     ReimbursementService rbService;
 
@@ -37,7 +39,11 @@ class ReimbursementServiceTest {
         t1.setSum(500.0);
         t1.setExpense("Currywurst");
 
+        Mockito.when(personService.getAllPersons()).thenReturn(List.of(p1, p2));
         Mockito.when(txService.getAllTransactions()).thenReturn(List.of(t1));
+        Mockito.when(txService.getBalance(p1)).thenReturn(500.0);
+        Mockito.when(txService.getBalance(p2)).thenReturn(0.0);
+
 
         // Act
         List<Reimbursement> listRbs = rbService.getReimbursements();
@@ -46,7 +52,7 @@ class ReimbursementServiceTest {
         assertEquals(1, listRbs.size());
         assertEquals("Heinrich", listRbs.getFirst().getCreditor().getName());
         assertEquals("Julius", listRbs.getFirst().getDebtor().getName());
-        assertEquals(500.0, listRbs.getFirst().getSum());
+        assertEquals(250.0, listRbs.getFirst().getSum());
     }
 
 }
