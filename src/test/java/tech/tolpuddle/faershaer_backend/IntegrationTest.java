@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class IntegrationTest {
 
-    final String TRANSACTIONS_ENDPOINT = "/";
+    final String TRANSACTIONS_ENDPOINT = "/transactions";
 
     @Autowired
     WebApplicationContext context;
@@ -84,7 +84,7 @@ public class IntegrationTest {
     @Test
     @DirtiesContext
     void shouldDeleteTransaction() {
-        RequestBuilder delete = MockMvcRequestBuilders.delete(TRANSACTIONS_ENDPOINT + "1");
+        RequestBuilder delete = MockMvcRequestBuilders.delete(TRANSACTIONS_ENDPOINT + "/1");
         RequestBuilder get = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(delete)
