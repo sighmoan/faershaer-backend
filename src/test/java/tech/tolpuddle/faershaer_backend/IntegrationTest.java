@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -19,6 +20,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class IntegrationTest {
@@ -39,9 +41,9 @@ public class IntegrationTest {
         try {
             mockMvc.perform(req)
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.length()", is(10)))
+                    .andExpect(jsonPath("$.length()", is(8)))
                     .andExpect(jsonPath("$.[0].id", is("1")))
-                    .andExpect(jsonPath("$.[0].expense", is("Parking")))
+                    .andExpect(jsonPath("$.[0].expense", is("Stationnement")))
                     .andExpect(jsonPath("$.[0].sum", is(10.0)));
         } catch(Exception ex) {
             fail(ex.getMessage());
