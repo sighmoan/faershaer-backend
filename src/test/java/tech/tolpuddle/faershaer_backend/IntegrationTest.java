@@ -43,6 +43,7 @@ public class IntegrationTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()", is(8)))
                     .andExpect(jsonPath("$.[0].id", is("1")))
+                    .andExpect(jsonPath("$.[0].payer", is("Jean")))
                     .andExpect(jsonPath("$.[0].expense", is("Stationnement")))
                     .andExpect(jsonPath("$.[0].sum", is(10.0)));
         } catch(Exception ex) {

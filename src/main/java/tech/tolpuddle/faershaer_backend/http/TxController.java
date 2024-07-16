@@ -18,12 +18,12 @@ public class TxController {
     }
 
     @GetMapping
-    public List<Transaction> getTransactions() {
-        return txService.getAllTransactions();
+    public List<TransactionDto> getTransactions() {
+        return txService.getAllTransactions().stream().map((TransactionDto::getDto)).toList();
     }
 
     @PostMapping
-    public ResponseEntity<Void> addTransaction(@RequestBody TransactionDto dto) {
+    public ResponseEntity<Void> addTransaction(@RequestBody AddTransactionDto dto) {
         txService.addTransaction(dto.getTransaction());
         return ResponseEntity.ok().build();
     }
