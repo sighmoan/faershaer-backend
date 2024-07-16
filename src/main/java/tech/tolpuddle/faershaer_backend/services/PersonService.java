@@ -3,6 +3,7 @@ package tech.tolpuddle.faershaer_backend.services;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import tech.tolpuddle.faershaer_backend.domain.DuplicatePersonException;
+import tech.tolpuddle.faershaer_backend.domain.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.PersonDbRepo;
 
@@ -29,5 +30,9 @@ public class PersonService {
         } catch(DataIntegrityViolationException ex) {
             throw new DuplicatePersonException();
         }
+    }
+
+    public Person getById(String id) {
+        return repo.findById(id).orElseThrow(NoSuchPersonException::new);
     }
 }

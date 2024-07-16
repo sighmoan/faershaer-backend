@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.http.dtos.AddTransactionDto;
 import tech.tolpuddle.faershaer_backend.http.dtos.TransactionDto;
+import tech.tolpuddle.faershaer_backend.services.PersonService;
 import tech.tolpuddle.faershaer_backend.services.TxService;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.List;
 public class TxController {
 
     TxService txService;
+    PersonService personService;
 
-    public TxController(TxService txService) {
+    public TxController(TxService txService, PersonService personService) {
         this.txService = txService;
+        this.personService = personService;
     }
 
     @GetMapping
@@ -26,7 +29,7 @@ public class TxController {
 
     @PostMapping
     public ResponseEntity<Void> addTransaction(@RequestBody AddTransactionDto dto) {
-        txService.addTransaction(dto.getTransaction());
+        txService.addTransaction(dto.getTransaction(personService.getById(dto.payerId())));
         return ResponseEntity.ok().build();
     }
 
