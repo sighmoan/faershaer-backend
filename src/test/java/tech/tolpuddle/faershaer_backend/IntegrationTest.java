@@ -29,6 +29,7 @@ public class IntegrationTest {
 
     final String TRANSACTIONS_ENDPOINT = "/transactions";
     final String PERSONS_ENDPOINT = "/persons";
+    final String REIMBURSEMENTS_ENDPOINT = "/reimbursements";
 
     @Autowired
     WebApplicationContext context;
@@ -130,6 +131,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldAddPerson() {
         String nameToAdd = "Sylvain";
 
@@ -163,6 +165,18 @@ public class IntegrationTest {
         try {
             mockMvc.perform(post)
                     .andExpect(status().isConflict());
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldReturnReimbursements() {
+        RequestBuilder get = MockMvcRequestBuilders.get(REIMBURSEMENTS_ENDPOINT);
+
+        try {
+            mockMvc.perform(get)
+                    .andExpect(status().isOk());
         } catch (Exception ex) {
             fail(ex.getMessage());
         }
