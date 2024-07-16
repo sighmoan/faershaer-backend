@@ -60,7 +60,7 @@ public class IntegrationTest {
     @DirtiesContext
     void shouldCreateTransaction() {
         String txToAdd = "{\n" +
-                "\t\"payer\": \"Slippin' Jimmy\",\n" +
+                "\t\"payerId\": \"1\",\n" +
                 "\t\"expense\": \"Chicago Sunroof\",\n" +
                 "\t\"sum\": 4.20\n" +
                 "}\n";
@@ -74,7 +74,7 @@ public class IntegrationTest {
                     .andExpect(status().isOk());
             mockMvc.perform(get)
                     .andExpect(jsonPath("$.length()", is(9)))
-                    .andExpect(jsonPath("$.[8].payer", is("Slippin' Jimmy")))
+                    .andExpect(jsonPath("$.[8].payer", is("Jean")))
                     .andExpect(jsonPath("$.[8].expense", is("Chicago Sunroof")))
                     .andExpect(jsonPath("$.[8].sum", is(4.20)));
         } catch(Exception ex) {
