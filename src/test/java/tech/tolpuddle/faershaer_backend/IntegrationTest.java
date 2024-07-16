@@ -27,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class IntegrationTest {
 
+    final String TRANSACTIONS_ENDPOINT = "/";
+
     @Autowired
     WebApplicationContext context;
 
@@ -39,7 +41,7 @@ public class IntegrationTest {
 
     @Test
     void shouldListTransactions() {
-        RequestBuilder req = MockMvcRequestBuilders.get("/");
+        RequestBuilder req = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(req)
                     .andExpect(status().isOk())
@@ -61,11 +63,11 @@ public class IntegrationTest {
                 "\t\"expense\": \"Chicago Sunroof\",\n" +
                 "\t\"sum\": 4.20\n" +
                 "}\n";
-        RequestBuilder post = MockMvcRequestBuilders.post("/")
+        RequestBuilder post = MockMvcRequestBuilders.post(TRANSACTIONS_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(txToAdd);
 
-        RequestBuilder get = MockMvcRequestBuilders.get("/");
+        RequestBuilder get = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(post)
                     .andExpect(status().isOk());
@@ -82,8 +84,8 @@ public class IntegrationTest {
     @Test
     @DirtiesContext
     void shouldDeleteTransaction() {
-        RequestBuilder delete = MockMvcRequestBuilders.delete("/1");
-        RequestBuilder get = MockMvcRequestBuilders.get("/");
+        RequestBuilder delete = MockMvcRequestBuilders.delete(TRANSACTIONS_ENDPOINT + "1");
+        RequestBuilder get = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(delete)
                     .andExpect(status().isNoContent());
