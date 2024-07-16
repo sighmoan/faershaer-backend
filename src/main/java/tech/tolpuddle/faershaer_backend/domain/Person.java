@@ -11,6 +11,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @Column(unique = true)
     String name;
 
     @OneToMany(mappedBy = "payer")

@@ -1,6 +1,8 @@
 package tech.tolpuddle.faershaer_backend.services;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import tech.tolpuddle.faershaer_backend.domain.DuplicatePersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.PersonDbRepo;
 
@@ -22,6 +24,10 @@ public class PersonService {
     public void addPerson(String name) {
         Person p = new Person();
         p.setName(name);
-        repo.save(p);
+        try {
+            repo.save(p);
+        } catch(DataIntegrityViolationException ex) {
+            throw new DuplicatePersonException();
+        }
     }
 }
