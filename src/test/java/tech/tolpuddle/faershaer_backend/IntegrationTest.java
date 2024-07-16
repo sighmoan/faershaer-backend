@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -46,6 +48,31 @@ public class IntegrationTest {
                     .andExpect(jsonPath("$.[0].payer", is("Jean")))
                     .andExpect(jsonPath("$.[0].expense", is("Stationnement")))
                     .andExpect(jsonPath("$.[0].sum", is(10.0)));
+        } catch(Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldCreateTransaction() {
+        String txToAdd = "{\n" +
+                "\t\"payer\": \"Slippin' Jimmy\",\n" +
+                "\t\"expense\": \"Chicago Sunroof\",\n" +
+                "\t\"sum\": 4.20\n" +
+                "}\n";
+        RequestBuilder post = MockMvcRequestBuilders.post("/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(txToAdd);
+
+        RequestBuilder get = MockMvcRequestBuilders.get("/");
+        try {
+            mockMvc.perform(post)
+                    .andExpect(status().isOk());
+            mockMvc.perform(get)
+                    .andExpect(jsonPath("$.length()", is(9)))
+                    .andExpect(jsonPath("$.[8].payer", is("Slippin' Jimmy")))
+                    .andExpect(jsonPath("$.[8].expense", is("Chicago Sunroof")))
+                    .andExpect(jsonPath("$.[8].sum", is(4.20)));
         } catch(Exception ex) {
             fail(ex.getMessage());
         }

@@ -9,7 +9,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person payer;
     private String expense;
     private Double sum;
