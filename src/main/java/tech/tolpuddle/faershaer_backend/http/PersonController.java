@@ -1,5 +1,6 @@
 package tech.tolpuddle.faershaer_backend.http;
 
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.http.dtos.PersonDto;
@@ -34,5 +35,11 @@ public class PersonController {
     private ResponseEntity<Void> addPerson(@RequestBody String name) {
         service.addPerson(name);
         return ResponseEntity.created(URI.create("/persons")).build();
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> removePerson(@PathVariable String id) {
+        service.removePerson(id);
+        return ResponseEntity.noContent().build();
     }
 }

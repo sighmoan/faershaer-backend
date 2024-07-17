@@ -35,4 +35,8 @@ public class PersonService {
     public Person getById(String id) {
         return repo.findById(id).orElseThrow(NoSuchPersonException::new);
     }
+
+    public void removePerson(String id) {
+        repo.deleteById(id);
+    }
 }

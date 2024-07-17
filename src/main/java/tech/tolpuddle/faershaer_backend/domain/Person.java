@@ -14,7 +14,7 @@ public class Person {
     @Column(unique = true)
     String name;
 
-    @OneToMany(mappedBy = "payer")
+    @OneToMany(mappedBy = "payer", cascade = CascadeType.REMOVE)
     List<Transaction> transactions;
 
     public String getId() {

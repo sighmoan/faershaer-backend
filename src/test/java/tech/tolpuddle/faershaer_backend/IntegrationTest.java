@@ -171,6 +171,18 @@ public class IntegrationTest {
     }
 
     @Test
+    void shouldRemovePerson() {
+        RequestBuilder delete = MockMvcRequestBuilders.delete(PERSONS_ENDPOINT + "/1");
+
+        try {
+            mockMvc.perform(delete)
+                    .andExpect(status().isNoContent());
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
     void shouldReturnReimbursements() {
         RequestBuilder get = MockMvcRequestBuilders.get(REIMBURSEMENTS_ENDPOINT);
 
