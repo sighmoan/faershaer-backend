@@ -3,9 +3,11 @@ package tech.tolpuddle.faershaer_backend.http;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.domain.Event;
+import tech.tolpuddle.faershaer_backend.http.dtos.EventDto;
 import tech.tolpuddle.faershaer_backend.services.EventService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -16,6 +18,11 @@ public class EventController {
 
     public EventController(EventService eventService) {
         this.eventService = eventService;
+    }
+
+    @GetMapping
+    public List<EventDto> getEvents() {
+        return eventService.getEvents().stream().map(EventDto::getDto).toList();
     }
 
     @PostMapping

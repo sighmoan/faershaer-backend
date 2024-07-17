@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import tech.tolpuddle.faershaer_backend.domain.Event;
 import tech.tolpuddle.faershaer_backend.domain.EventDbRepo;
 
+import java.util.List;
+
 @Service
 public class EventService {
     private EventDbRepo repo;
@@ -21,5 +23,9 @@ public class EventService {
 
     public void deleteById(String eventId) {
         repo.deleteById(eventId);
+    }
+
+    public List<Event> getEvents() {
+        return repo.findAll();
     }
 }

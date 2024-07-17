@@ -221,6 +221,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldCreateNewEvent() throws Exception {
         RequestBuilder post = MockMvcRequestBuilders.post("/events")
                 .contentType(MediaType.TEXT_PLAIN)
@@ -228,5 +229,14 @@ public class IntegrationTest {
 
         mockMvc.perform(post)
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void shouldGetEvents() throws Exception {
+        RequestBuilder get = MockMvcRequestBuilders.get("/events");
+
+        mockMvc.perform(get)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()", is(2)));
     }
 }
