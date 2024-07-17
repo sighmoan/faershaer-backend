@@ -1,4 +1,4 @@
-package tech.tolpuddle.faershaer_backend.domain;
+package tech.tolpuddle.faershaer_backend.exceptions;
 
 import java.util.NoSuchElementException;
 

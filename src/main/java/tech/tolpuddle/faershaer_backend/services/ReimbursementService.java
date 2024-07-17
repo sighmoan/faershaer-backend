@@ -1,13 +1,12 @@
 package tech.tolpuddle.faershaer_backend.services;
 
+import tech.tolpuddle.faershaer_backend.exceptions.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.Reimbursement;
 import tech.tolpuddle.faershaer_backend.domain.Transaction;
+import tech.tolpuddle.faershaer_backend.exceptions.NoTransactionsException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ReimbursementService {
     TxService txService;
@@ -29,31 +28,40 @@ public class ReimbursementService {
         personService.getAllPersons().forEach((person) ->
                 personsWithBalances.put(person, fairSharePerPerson - txService.getBalance(person)));
 
-        Reimbursement theRb = getReimbursement(personsWithBalances);
 
-        return List.of(theRb);
+        ArrayList<Reimbursement> reimbursements = new ArrayList<>();
+        if(personsWithBalances.isEmpty()) {
+            throw new NoTransactionsException();
+        }
+        computeReimbursements(reimbursements, personsWithBalances);
+
+        return reimbursements;
     }
 
-    private static Reimbursement getReimbursement(Map<Person, Double> personsWithBalances) {
-        Map.Entry<Person, Double> greatestCreditor = null, greatestDebtor = null;
+    private static void computeReimbursements(ArrayList<Reimbursement> reimbursements, Map<Person, Double> personsWithBalances) {
+        Map.Entry<Person, Double> minCreditor = null, maxDebtor = null;
 
         for(Map.Entry<Person, Double> entry : personsWithBalances.entrySet()) {
-            if(greatestCreditor == null || entry.getValue() < greatestCreditor.getValue()) {
-                greatestCreditor = entry;
+            if(minCreditor == null || entry.getValue() < minCreditor.getValue()) {
+                minCreditor = entry;
             }
-            if(greatestDebtor == null || entry.getValue() > greatestDebtor.getValue()) {
-                greatestDebtor = entry;
+            if(maxDebtor == null || entry.getValue() > maxDebtor.getValue()) {
+                maxDebtor = entry;
             }
         }
 
-        Reimbursement theRb = new Reimbursement();
-        theRb.setCreditor(greatestCreditor.getKey());
-        theRb.setDebtor(greatestDebtor.getKey());
-        if(greatestCreditor.getValue() < greatestDebtor.getValue()) {
-            theRb.setSum(greatestDebtor.getValue());
-        } else {
-            theRb.setSum(greatestCreditor.getValue());
-        }
-        return theRb;
+        Double rbValue = Math.min(Math.abs(minCreditor.getValue()), Math.abs(maxDebtor.getValue()));
+        if(rbValue < 1) return;
+
+        Reimbursement rb = new Reimbursement();
+        rb.setCreditor(minCreditor.getKey());
+        rb.setDebtor(maxDebtor.getKey());
+        rb.setSum(rbValue);
+
+        reimbursements.add(rb);
+        minCreditor.setValue(minCreditor.getValue() + rb.getSum());
+        maxDebtor.setValue(maxDebtor.getValue() - rb.getSum());
+
+        computeReimbursements(reimbursements, personsWithBalances);
     }
 }

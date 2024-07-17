@@ -71,7 +71,7 @@ class ReimbursementServiceTest {
 
         Transaction t1 = createTransaction(p1, 300.0, "Bier");
         Transaction t2 = createTransaction(p2, 240.0, "Gewurze");
-        Transaction t3 = createTransaction(p3, 80.0, "Limonade");
+        Transaction t3 = createTransaction(p3, 60.0, "Limonade");
 
         Mockito.when(personService.getAllPersons()).thenReturn(List.of(p1, p2, p3));
         Mockito.when(txService.getAllTransactions()).thenReturn(List.of(t1, t2, t3));

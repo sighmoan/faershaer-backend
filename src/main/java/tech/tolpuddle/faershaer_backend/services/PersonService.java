@@ -2,8 +2,8 @@ package tech.tolpuddle.faershaer_backend.services;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import tech.tolpuddle.faershaer_backend.domain.DuplicatePersonException;
-import tech.tolpuddle.faershaer_backend.domain.NoSuchPersonException;
+import tech.tolpuddle.faershaer_backend.exceptions.DuplicatePersonException;
+import tech.tolpuddle.faershaer_backend.exceptions.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.PersonDbRepo;
 
