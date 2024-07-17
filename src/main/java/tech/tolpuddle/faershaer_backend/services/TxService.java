@@ -1,18 +1,17 @@
 package tech.tolpuddle.faershaer_backend.services;
 
 import org.springframework.stereotype.Service;
-import tech.tolpuddle.faershaer_backend.domain.Person;
-import tech.tolpuddle.faershaer_backend.domain.Transaction;
-import tech.tolpuddle.faershaer_backend.domain.TxDbRepo;
+import org.springframework.web.context.annotation.RequestScope;
+import tech.tolpuddle.faershaer_backend.domain.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class TxService {
-    TxDbRepo repo;
+    TxRepo repo;
 
-    public TxService(TxDbRepo repo) {
+    public TxService(TxRepo repo) {
         this.repo = repo;
     }
 

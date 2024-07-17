@@ -17,6 +17,14 @@ public class Transaction {
     private String expense;
     private Double sum;
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     public String getId() {
         return id;
     }
