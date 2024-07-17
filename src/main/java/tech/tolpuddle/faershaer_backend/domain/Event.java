@@ -11,6 +11,38 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public List<Person> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Person> participants) {
+        this.participants = participants;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     String label;
 
     @ManyToMany

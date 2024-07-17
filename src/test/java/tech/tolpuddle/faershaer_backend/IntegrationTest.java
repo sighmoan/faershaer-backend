@@ -219,4 +219,14 @@ public class IntegrationTest {
         mockMvc.perform(get)
                     .andExpect(status().isNotFound());
     }
+
+    @Test
+    void shouldCreateNewEvent() throws Exception {
+        RequestBuilder post = MockMvcRequestBuilders.post("/events")
+                .contentType(MediaType.TEXT_PLAIN)
+                .content("Skifahrt");
+
+        mockMvc.perform(post)
+                .andExpect(status().isCreated());
+    }
 }
