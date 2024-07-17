@@ -27,6 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class IntegrationTest {
 
+    final String PREFIX_FIRST_EVENT = "/events/1";
+    final String PREFIX_SECOND_EVENT = "/events/2";
+
     final String TRANSACTIONS_ENDPOINT = "/transactions";
     final String PERSONS_ENDPOINT = "/persons";
     final String REIMBURSEMENTS_ENDPOINT = "/reimbursements";
@@ -43,7 +46,7 @@ public class IntegrationTest {
 
     @Test
     void shouldListTransactions() {
-        RequestBuilder req = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
+        RequestBuilder req = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(req)
                     .andExpect(status().isOk())
@@ -65,11 +68,11 @@ public class IntegrationTest {
                 "\t\"expense\": \"Chicago Sunroof\",\n" +
                 "\t\"sum\": 4.20\n" +
                 "}\n";
-        RequestBuilder post = MockMvcRequestBuilders.post(TRANSACTIONS_ENDPOINT)
+        RequestBuilder post = MockMvcRequestBuilders.post(PREFIX_FIRST_EVENT + TRANSACTIONS_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(txToAdd);
 
-        RequestBuilder get = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(post)
                     .andExpect(status().isOk());
@@ -86,8 +89,8 @@ public class IntegrationTest {
     @Test
     @DirtiesContext
     void shouldDeleteTransaction() {
-        RequestBuilder delete = MockMvcRequestBuilders.delete(TRANSACTIONS_ENDPOINT + "/1");
-        RequestBuilder get = MockMvcRequestBuilders.get(TRANSACTIONS_ENDPOINT);
+        RequestBuilder delete = MockMvcRequestBuilders.delete(PREFIX_FIRST_EVENT + TRANSACTIONS_ENDPOINT + "/1");
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + TRANSACTIONS_ENDPOINT);
         try {
             mockMvc.perform(delete)
                     .andExpect(status().isNoContent());
@@ -103,7 +106,7 @@ public class IntegrationTest {
 
     @Test
     void shouldGetPersons() {
-        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT);
 
         try {
             mockMvc.perform(get)
@@ -117,7 +120,7 @@ public class IntegrationTest {
 
     @Test
     void shouldProvideTotalsWhenGettingPeople() {
-        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT);
 
         try {
             mockMvc.perform(get)
@@ -135,11 +138,11 @@ public class IntegrationTest {
     void shouldAddPerson() {
         String nameToAdd = "Sylvain";
 
-        RequestBuilder post = MockMvcRequestBuilders.post(PERSONS_ENDPOINT)
+        RequestBuilder post = MockMvcRequestBuilders.post(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT)
                 .contentType(MediaType.TEXT_PLAIN)
                 .content(nameToAdd);
 
-        RequestBuilder get = MockMvcRequestBuilders.get(PERSONS_ENDPOINT);
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT);
 
         try {
             mockMvc.perform(post)
@@ -158,7 +161,7 @@ public class IntegrationTest {
     void shouldNotAddPersonWithConflictingName() {
         String nameToAdd = "Jean";
 
-        RequestBuilder post = MockMvcRequestBuilders.post(PERSONS_ENDPOINT)
+        RequestBuilder post = MockMvcRequestBuilders.post(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT)
                 .contentType(MediaType.TEXT_PLAIN)
                 .content(nameToAdd);
 
@@ -173,7 +176,7 @@ public class IntegrationTest {
     @Test
     @DirtiesContext
     void shouldRemovePerson() {
-        RequestBuilder delete = MockMvcRequestBuilders.delete(PERSONS_ENDPOINT + "/1");
+        RequestBuilder delete = MockMvcRequestBuilders.delete(PREFIX_FIRST_EVENT + PERSONS_ENDPOINT + "/1");
 
         try {
             mockMvc.perform(delete)
@@ -185,11 +188,24 @@ public class IntegrationTest {
 
     @Test
     void shouldReturnReimbursements() {
-        RequestBuilder get = MockMvcRequestBuilders.get(REIMBURSEMENTS_ENDPOINT);
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_FIRST_EVENT + REIMBURSEMENTS_ENDPOINT);
 
         try {
             mockMvc.perform(get)
                     .andExpect(status().isOk());
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    void shouldGetTransactionsForSecondEvent() {
+        RequestBuilder get = MockMvcRequestBuilders.get(PREFIX_SECOND_EVENT+TRANSACTIONS_ENDPOINT);
+
+        try {
+            mockMvc.perform(get)
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.length()", is(5)));
         } catch (Exception ex) {
             fail(ex.getMessage());
         }

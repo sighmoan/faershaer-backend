@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(("/transactions"))
+@RequestMapping(("/events/{eventId}/transactions"))
 public class TxController {
 
     TxService txService;

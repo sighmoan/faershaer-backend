@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/persons")
+@RequestMapping("/events/{eventId}/persons")
 public class PersonController {
 
     PersonService service;
