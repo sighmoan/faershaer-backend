@@ -25,6 +25,11 @@ public class EventController {
         return eventService.getEvents().stream().map(EventDto::getDto).toList();
     }
 
+    @GetMapping("/{eventId}")
+    public EventDto getThisEvent(@PathVariable String eventId) {
+        return EventDto.getDto(eventService.get(eventId));
+    }
+
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody String label) {
         Event event = eventService.createNewEvent(label);
@@ -32,7 +37,7 @@ public class EventController {
     }
 
     @DeleteMapping("/{eventId}")
-    public void deleteEvent(String eventId) {
+    public void deleteEvent(@PathVariable String eventId) {
         eventService.deleteById(eventId);
     }
 }

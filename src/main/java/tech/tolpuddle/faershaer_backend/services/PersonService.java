@@ -2,6 +2,7 @@ package tech.tolpuddle.faershaer_backend.services;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import tech.tolpuddle.faershaer_backend.domain.PersonRepo;
 import tech.tolpuddle.faershaer_backend.exceptions.DuplicatePersonException;
 import tech.tolpuddle.faershaer_backend.exceptions.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
@@ -12,9 +13,9 @@ import java.util.List;
 @Service
 public class PersonService {
 
-    PersonDbRepo repo;
+    PersonRepo repo;
 
-    public PersonService(PersonDbRepo repo) {
+    public PersonService(PersonRepo repo) {
         this.repo = repo;
     }
 
@@ -33,7 +34,7 @@ public class PersonService {
     }
 
     public Person getById(String id) {
-        return repo.findById(id).orElseThrow(NoSuchPersonException::new);
+        return repo.findById(id);
     }
 
     public void removePerson(String id) {

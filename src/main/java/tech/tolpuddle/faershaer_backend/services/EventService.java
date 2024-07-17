@@ -3,6 +3,8 @@ package tech.tolpuddle.faershaer_backend.services;
 import org.springframework.stereotype.Service;
 import tech.tolpuddle.faershaer_backend.domain.Event;
 import tech.tolpuddle.faershaer_backend.domain.EventDbRepo;
+import tech.tolpuddle.faershaer_backend.exceptions.NoSuchEventException;
+import tech.tolpuddle.faershaer_backend.http.dtos.EventDto;
 
 import java.util.List;
 
@@ -27,5 +29,9 @@ public class EventService {
 
     public List<Event> getEvents() {
         return repo.findAll();
+    }
+
+    public Event get(String eventId) {
+        return repo.findById(eventId).orElseThrow(NoSuchEventException::new);
     }
 }

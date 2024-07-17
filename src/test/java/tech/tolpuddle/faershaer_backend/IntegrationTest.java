@@ -1,5 +1,6 @@
 package tech.tolpuddle.faershaer_backend;
 
+import org.apache.coyote.Request;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -238,5 +239,15 @@ public class IntegrationTest {
         mockMvc.perform(get)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", is(2)));
+    }
+
+    @Test
+    void shouldGetThisEvent() throws Exception {
+        RequestBuilder get = MockMvcRequestBuilders.get("/events/2");
+
+        mockMvc.perform(get)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.label", is("Dîner au restaurant")))
+                .andExpect(jsonPath("$.id", is("2")));
     }
 }
