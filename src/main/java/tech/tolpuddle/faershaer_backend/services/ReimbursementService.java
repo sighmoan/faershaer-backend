@@ -1,5 +1,6 @@
 package tech.tolpuddle.faershaer_backend.services;
 
+import org.springframework.stereotype.Service;
 import tech.tolpuddle.faershaer_backend.exceptions.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.domain.Person;
 import tech.tolpuddle.faershaer_backend.domain.Reimbursement;
@@ -8,6 +9,7 @@ import tech.tolpuddle.faershaer_backend.exceptions.NoTransactionsException;
 
 import java.util.*;
 
+@Service
 public class ReimbursementService {
     TxService txService;
     PersonService personService;
