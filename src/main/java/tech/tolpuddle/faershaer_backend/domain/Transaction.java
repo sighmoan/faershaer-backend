@@ -9,6 +9,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @ManyToOne
+    private Event event;
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Person payer;
     private String expense;
