@@ -171,6 +171,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldRemovePerson() {
         RequestBuilder delete = MockMvcRequestBuilders.delete(PERSONS_ENDPOINT + "/1");
 
