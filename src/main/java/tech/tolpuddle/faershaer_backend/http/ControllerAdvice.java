@@ -49,4 +49,9 @@ public class ControllerAdvice {
     ResponseEntity<Void> handleMissingPerson() {
         return ResponseEntity.badRequest().build();
     }
+
+    @ExceptionHandler(NoSuchEventException.class)
+    ResponseEntity<Void> handleMissingEvent() {
+        return ResponseEntity.notFound().build();
+    }
 }

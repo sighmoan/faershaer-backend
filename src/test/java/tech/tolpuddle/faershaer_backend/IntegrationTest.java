@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.*;
@@ -209,5 +210,13 @@ public class IntegrationTest {
         } catch (Exception ex) {
             fail(ex.getMessage());
         }
+    }
+
+    @Test
+    void shouldReturnErrorWhenAskingForNonexistentEvent() throws Exception{
+        RequestBuilder get = MockMvcRequestBuilders.get("/events/BLAH123"+TRANSACTIONS_ENDPOINT);
+
+        mockMvc.perform(get)
+                    .andExpect(status().isNotFound());
     }
 }
