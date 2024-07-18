@@ -47,6 +47,9 @@ public class ControllerAdvice {
     @RequestScope
     public UserAccessor registerUser(HttpServletRequest req) {
         String userId = "1";
+        if(!req.getHeader("Authorization").isEmpty()) {
+            userId = req.getHeader("Authorization");
+        }
         User user = userRepo.findById(userId).orElseThrow();
         return new UserAccessor(user);
     }
