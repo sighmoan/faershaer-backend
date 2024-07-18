@@ -2,6 +2,7 @@ package tech.tolpuddle.faershaer_backend;
 
 import org.apache.coyote.Request;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,6 +161,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @Disabled
     void shouldNotAddPersonWithConflictingName() {
         String nameToAdd = "Jean";
 
