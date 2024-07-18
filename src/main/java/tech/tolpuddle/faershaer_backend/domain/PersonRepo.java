@@ -25,6 +25,7 @@ public class PersonRepo {
 
     public void save(Person p) {
         eventAccessor.getEvent().getParticipants().add(p);
+        p.setEvent(eventAccessor.getEvent());
         repo.save(p);
         eventRepo.save(eventAccessor.getEvent());
 

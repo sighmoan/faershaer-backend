@@ -6,17 +6,11 @@ INSERT INTO users (id, name, portrait_url) VALUES ('5', 'Mike', 'https://ca.slac
 
 INSERT INTO events (id, label) VALUES ('1', 'Picnic in the Park');
 
-INSERT INTO persons (id, name, user_id) VALUES ('1', 'Alek', '1');
-INSERT INTO persons (id, name, user_id) VALUES ('2', 'Alice', '2');
-INSERT INTO persons (id, name, user_id) VALUES ('3', 'Bob', '3');
-INSERT INTO persons (id, name, user_id) VALUES ('4', 'Sara', '4');
-INSERT INTO persons (id, name, user_id) VALUES ('5', 'Mike', '5');
-
-INSERT INTO events_participants (participants_id, event_id) VALUES ('1', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('2', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('3', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('4', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('5', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('1', 'Alek', '1', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('2', 'Alice', '2', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('3', 'Bob', '3', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('4', 'Sara', '4', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('5', 'Mike', '5', '1');
 
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('1', '1', '1', 'Parking', 10.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('2', '1', '2', 'Snacks', 20.75);
@@ -31,13 +25,9 @@ INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('10', '1
 
 INSERT INTO events (id, label) VALUES ('2', 'Dinner at the Restaurant');
 
-INSERT INTO persons (id, name) VALUES ('6', 'Stinker McGee');
-INSERT INTO persons (id, name) VALUES ('7', 'Guts Swanson');
-INSERT INTO persons (id, name) VALUES ('8', 'Gus Gristly');
-
-INSERT INTO events_participants (participants_id, event_id) VALUES ('6', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('7', '1');
-INSERT INTO events_participants (participants_id, event_id) VALUES ('8', '1');
+INSERT INTO persons (id, name, event_id) VALUES ('6', 'Stinker McGee', '1');
+INSERT INTO persons (id, name, event_id) VALUES ('7', 'Guts Swanson', '1');
+INSERT INTO persons (id, name, event_id) VALUES ('8', 'Gus Gristly', '1');
 
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('11', '2', '1', 'Appetizers', 25.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('12', '2', '2', 'Main Course', 60.0);

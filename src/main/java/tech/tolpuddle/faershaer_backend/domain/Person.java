@@ -19,8 +19,8 @@ public class Person {
     @OneToMany(mappedBy = "payer", cascade = CascadeType.REMOVE)
     List<Transaction> transactions;
 
-    @ManyToMany
-    List<Event> events;
+    @ManyToOne
+    Event event;
 
     public String getPortraitUrl() {
         if(user == null) return "";
@@ -42,5 +42,9 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

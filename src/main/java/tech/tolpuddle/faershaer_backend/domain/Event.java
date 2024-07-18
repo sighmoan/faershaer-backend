@@ -45,7 +45,7 @@ public class Event {
 
     String label;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "event")
     List<Person> participants;
 
     @OneToMany(mappedBy = "event")
