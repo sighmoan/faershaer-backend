@@ -13,21 +13,20 @@ public class Person {
 
     String name;
 
-    String portraitUrl;
-
-    public String getPortraitUrl() {
-        return portraitUrl;
-    }
-
-    public void setPortraitUrl(String portraitUrl) {
-        this.portraitUrl = portraitUrl;
-    }
+    @ManyToOne
+    User user;
 
     @OneToMany(mappedBy = "payer", cascade = CascadeType.REMOVE)
     List<Transaction> transactions;
 
     @ManyToMany
     List<Event> events;
+
+    public String getPortraitUrl() {
+        if(user == null) return "";
+
+        return user.getPortraitUrl();
+    }
 
     public String getId() {
         return id;
