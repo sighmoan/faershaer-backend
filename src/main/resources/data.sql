@@ -6,6 +6,12 @@ INSERT INTO persons (id, name) VALUES ('3', 'Bob');
 INSERT INTO persons (id, name) VALUES ('4', 'Sara');
 INSERT INTO persons (id, name) VALUES ('5', 'Mike');
 
+INSERT INTO events_participants (participants_id, event_id) VALUES ('1', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('2', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('3', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('4', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('5', '1');
+
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('1', '1', '1', 'Parking', 10.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('2', '1', '2', 'Snacks', 20.75);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('3', '1', '3', 'Entrance Fee', 30.0);
@@ -18,6 +24,14 @@ INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('9', '1'
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('10', '1', '5', 'Parking', 10.0);
 
 INSERT INTO events (id, label) VALUES ('2', 'Dinner at the Restaurant');
+
+INSERT INTO persons (id, name) VALUES ('6', 'Stinker McGee');
+INSERT INTO persons (id, name) VALUES ('7', 'Guts Swanson');
+INSERT INTO persons (id, name) VALUES ('8', 'Gus Gristly');
+
+INSERT INTO events_participants (participants_id, event_id) VALUES ('6', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('7', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('8', '1');
 
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('11', '2', '1', 'Appetizers', 25.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('12', '2', '2', 'Main Course', 60.0);

@@ -6,6 +6,12 @@ INSERT INTO persons (id, name) VALUES ('3', 'Robain');
 INSERT INTO persons (id, name) VALUES ('4', 'Seraphine');
 INSERT INTO persons (id, name) VALUES ('5', 'Miguel');
 
+INSERT INTO events_participants (participants_id, event_id) VALUES ('1', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('2', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('3', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('4', '1');
+INSERT INTO events_participants (participants_id, event_id) VALUES ('5', '1');
+
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('1', '1', '1', 'Stationnement', 10.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('2', '1', '2', 'Grignoter', 20.75);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('4', '1', '4', 'Boissons', 15.0);
