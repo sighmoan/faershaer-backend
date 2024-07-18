@@ -2,6 +2,8 @@ package tech.tolpuddle.faershaer_backend.http;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
@@ -24,6 +26,7 @@ import tech.tolpuddle.faershaer_backend.services.UserAccessor;
 @Configuration
 @org.springframework.web.bind.annotation.ControllerAdvice
 public class ControllerAdvice {
+    Logger logger = LogManager.getLogger();
 
     GenericApplicationContext context;
     EventDbRepo repo;
@@ -47,11 +50,13 @@ public class ControllerAdvice {
     @Bean
     @RequestScope
     public UserAccessor registerUser(HttpServletRequest req) {
-        String userId = "1";
+        String userId = "-1";
         if(req.getHeader("Authorization") != null) {
             userId = req.getHeader("Authorization");
         }
-        User user = userRepo.findById(userId).orElseThrow();
+        logger.debug("USER is {}", userId);
+        User user = userRepo.findById(userId).orElse(null);
+        logger.debug("meaning the USER is {}", user);
         return new UserAccessor(user);
     }
 

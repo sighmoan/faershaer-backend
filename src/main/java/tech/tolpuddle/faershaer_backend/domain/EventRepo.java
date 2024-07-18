@@ -27,6 +27,7 @@ public class EventRepo {
     }
 
     public List<Event> findAll() {
+        if(userAccessor.getUser() == null) return List.of();
         List<Person> persons = personRepo.findAllByUser(userAccessor.getUser());
         return persons.stream().map(Person::getEvent).toList();
     }

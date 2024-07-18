@@ -1,4 +1,4 @@
-INSERT INTO users (id, name, portrait_url) VALUES ('1', 'Alek', 'https://ca.slack-edge.com/TA01UCHBN-U068H00G83Z-a66138e76622-512');
+INSERT INTO users (id, name, portrait_url) VALUES ('user_2jQItOTuMusvHjORMeLVjPkjfEF', 'Simon', 'https://ca.slack-edge.com/TA01UCHBN-U068H00G83Z-a66138e76622-512');
 INSERT INTO users (id, name, portrait_url) VALUES ('2', 'Alice', 'https://ca.slack-edge.com/TA01UCHBN-U06SCMV1RUP-6c1a7224a5c7-512');
 INSERT INTO users (id, name, portrait_url) VALUES ('3', 'Bob', 'https://ca.slack-edge.com/TA01UCHBN-U06TG2P5L80-9509cd9eb3a9-512');
 INSERT INTO users (id, name, portrait_url) VALUES ('4', 'Sara', 'https://tailwindcss.com/_next/static/media/sarah-dayan.de9b3815.jpg');
@@ -6,7 +6,7 @@ INSERT INTO users (id, name, portrait_url) VALUES ('5', 'Mike', 'https://ca.slac
 
 INSERT INTO events (id, label) VALUES ('1', 'Picnic in the Park');
 
-INSERT INTO persons (id, name, user_id, event_id) VALUES ('1', 'Alek', '1', '1');
+INSERT INTO persons (id, name, user_id, event_id) VALUES ('1', 'Simon', 'user_2jQItOTuMusvHjORMeLVjPkjfEF', '1');
 INSERT INTO persons (id, name, user_id, event_id) VALUES ('2', 'Alice', '2', '1');
 INSERT INTO persons (id, name, user_id, event_id) VALUES ('3', 'Bob', '3', '1');
 INSERT INTO persons (id, name, user_id, event_id) VALUES ('4', 'Sara', '4', '1');
@@ -28,7 +28,7 @@ INSERT INTO events (id, label) VALUES ('2', 'Dinner at the Restaurant');
 INSERT INTO persons (id, name, event_id) VALUES ('6', 'Stinker McGee', '2');
 INSERT INTO persons (id, name, event_id) VALUES ('7', 'Guts Swanson', '2');
 INSERT INTO persons (id, name, event_id) VALUES ('8', 'Gus Gristly', '2');
-INSERT INTO persons (id, name, event_id, user_id) VALUES ('9', 'Alek Milo', '2', '1');
+INSERT INTO persons (id, name, event_id, user_id) VALUES ('9', 'Simon', '2', 'user_2jQItOTuMusvHjORMeLVjPkjfEF');
 
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('11', '2', '6', 'Appetizers', 25.0);
 INSERT INTO transactions (id, event_id, payer_id, expense, sum) VALUES ('12', '2', '6', 'Main Course', 60.0);

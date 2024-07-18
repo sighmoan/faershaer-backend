@@ -5,6 +5,9 @@ import tech.tolpuddle.faershaer_backend.domain.User;
 public class UserAccessor {
     private User user;
 
+    public UserAccessor() {
+    }
+
     public UserAccessor(User user) {
         this.user = user;
     }
