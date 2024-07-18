@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"Location"})
 public class EventController {
 
     EventService eventService;
