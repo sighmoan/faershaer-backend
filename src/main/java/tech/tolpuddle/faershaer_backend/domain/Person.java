@@ -51,4 +51,12 @@ public class Person {
     public void setEvent(Event event) {
         this.event = event;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

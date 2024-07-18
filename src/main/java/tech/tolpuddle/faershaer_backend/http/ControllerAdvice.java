@@ -38,7 +38,8 @@ public class ControllerAdvice {
     @Bean
     @RequestScope
     public EventAccessor registerEvent(HttpServletRequest req) {
-        String eventId = req.getRequestURI().split("/")[2];
+        String[] uri = req.getRequestURI().split("/");
+        String eventId = uri[2];
         Event event = repo.findById(eventId).orElseThrow(NoSuchEventException::new);
         return new EventAccessor(event);
     }

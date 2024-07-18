@@ -1,5 +1,7 @@
 package tech.tolpuddle.faershaer_backend.http;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.tolpuddle.faershaer_backend.domain.Event;
@@ -14,6 +16,8 @@ import java.util.List;
 @CrossOrigin(exposedHeaders = {"Location"})
 public class EventController {
 
+    Logger logger = LogManager.getLogger();
+
     EventService eventService;
 
     public EventController(EventService eventService) {
@@ -22,6 +26,7 @@ public class EventController {
 
     @GetMapping
     public List<EventDto> getEvents() {
+        logger.debug("getting events");
         return eventService.getEvents().stream().map(EventDto::getDto).toList();
     }
 

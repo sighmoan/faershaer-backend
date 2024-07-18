@@ -11,6 +11,14 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    String label;
+
+    @OneToMany(mappedBy = "event")
+    List<Person> participants;
+
+    @OneToMany(mappedBy = "event")
+    List<Transaction> transactions;
+
     public String getId() {
         return id;
     }
@@ -42,12 +50,4 @@ public class Event {
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
-
-    String label;
-
-    @OneToMany(mappedBy = "event")
-    List<Person> participants;
-
-    @OneToMany(mappedBy = "event")
-    List<Transaction> transactions;
 }
