@@ -13,6 +13,16 @@ public class Person {
 
     String name;
 
+    String portraitUrl;
+
+    public String getPortraitUrl() {
+        return portraitUrl;
+    }
+
+    public void setPortraitUrl(String portraitUrl) {
+        this.portraitUrl = portraitUrl;
+    }
+
     @OneToMany(mappedBy = "payer", cascade = CascadeType.REMOVE)
     List<Transaction> transactions;
 

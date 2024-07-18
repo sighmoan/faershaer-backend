@@ -1,10 +1,10 @@
 INSERT INTO events (id, label) VALUES ('1', 'Picnic in the Park');
 
-INSERT INTO persons (id, name) VALUES ('1', 'John');
-INSERT INTO persons (id, name) VALUES ('2', 'Alice');
-INSERT INTO persons (id, name) VALUES ('3', 'Bob');
-INSERT INTO persons (id, name) VALUES ('4', 'Sara');
-INSERT INTO persons (id, name) VALUES ('5', 'Mike');
+INSERT INTO persons (id, name, portrait_url) VALUES ('1', 'Alek', 'https://ca.slack-edge.com/TA01UCHBN-U068H00G83Z-a66138e76622-512');
+INSERT INTO persons (id, name, portrait_url) VALUES ('2', 'Alice', 'https://ca.slack-edge.com/TA01UCHBN-U06SCMV1RUP-6c1a7224a5c7-512');
+INSERT INTO persons (id, name, portrait_url) VALUES ('3', 'Bob', 'https://ca.slack-edge.com/TA01UCHBN-U06TG2P5L80-9509cd9eb3a9-512');
+INSERT INTO persons (id, name, portrait_url) VALUES ('4', 'Sara', 'https://tailwindcss.com/_next/static/media/sarah-dayan.de9b3815.jpg');
+INSERT INTO persons (id, name, portrait_url) VALUES ('5', 'Mike', 'https://ca.slack-edge.com/TA01UCHBN-U06SQBAEV1B-cfda066fb8cf-512');
 
 INSERT INTO events_participants (participants_id, event_id) VALUES ('1', '1');
 INSERT INTO events_participants (participants_id, event_id) VALUES ('2', '1');
