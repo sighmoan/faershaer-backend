@@ -21,4 +21,12 @@ public class User {
     public String getPortraitUrl() {
         return portraitUrl;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
