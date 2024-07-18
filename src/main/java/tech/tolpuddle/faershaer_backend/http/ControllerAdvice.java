@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.annotation.RequestScope;
 import tech.tolpuddle.faershaer_backend.domain.Event;
 import tech.tolpuddle.faershaer_backend.domain.EventDbRepo;
+import tech.tolpuddle.faershaer_backend.domain.User;
+import tech.tolpuddle.faershaer_backend.domain.UserDbRepo;
 import tech.tolpuddle.faershaer_backend.exceptions.DuplicatePersonException;
 import tech.tolpuddle.faershaer_backend.exceptions.NoSuchEventException;
 import tech.tolpuddle.faershaer_backend.exceptions.NoSuchPersonException;
 import tech.tolpuddle.faershaer_backend.services.EventAccessor;
+import tech.tolpuddle.faershaer_backend.services.UserAccessor;
 
 @Configuration
 @org.springframework.web.bind.annotation.ControllerAdvice
@@ -24,10 +27,12 @@ public class ControllerAdvice {
 
     GenericApplicationContext context;
     EventDbRepo repo;
+    UserDbRepo userRepo;
 
-    public ControllerAdvice(GenericApplicationContext context, EventDbRepo repo) {
+    public ControllerAdvice(GenericApplicationContext context, EventDbRepo repo, UserDbRepo userRepo) {
         this.context = context;
         this.repo = repo;
+        this.userRepo = userRepo;
     }
 
     @Bean
@@ -36,6 +41,14 @@ public class ControllerAdvice {
         String eventId = req.getRequestURI().split("/")[2];
         Event event = repo.findById(eventId).orElseThrow(NoSuchEventException::new);
         return new EventAccessor(event);
+    }
+
+    @Bean
+    @RequestScope
+    public UserAccessor registerUser(HttpServletRequest req) {
+        String userId = "1";
+        User user = userRepo.findById(userId).orElseThrow();
+        return new UserAccessor(user);
     }
 
     @ExceptionHandler(DuplicatePersonException.class)

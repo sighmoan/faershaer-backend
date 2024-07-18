@@ -40,6 +40,10 @@ public class Person {
         return name;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
