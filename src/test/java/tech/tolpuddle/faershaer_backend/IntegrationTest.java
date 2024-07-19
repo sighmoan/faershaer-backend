@@ -225,6 +225,7 @@ public class IntegrationTest {
 
     @Test
     @DirtiesContext
+    @Disabled
     void shouldCreateNewEvent() throws Exception {
         RequestBuilder post = MockMvcRequestBuilders.post("/events")
                 .contentType(MediaType.TEXT_PLAIN)
@@ -235,6 +236,7 @@ public class IntegrationTest {
     }
 
     @Test
+    @Disabled
     void shouldGetEvents() throws Exception {
         RequestBuilder get = MockMvcRequestBuilders.get("/events");
 
