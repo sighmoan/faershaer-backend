@@ -8,7 +8,6 @@ import java.util.List;
 @Table(name="users")
 public class User {
     @Id
-    @GeneratedValue
     String id;
 
     String name;
@@ -20,6 +19,18 @@ public class User {
 
     public String getPortraitUrl() {
         return portraitUrl;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPortraitUrl(String portraitUrl) {
+        this.portraitUrl = portraitUrl;
     }
 
     public String getId() {
