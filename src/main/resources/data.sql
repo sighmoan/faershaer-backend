@@ -1,4 +1,4 @@
-INSERT INTO users (id, name, portrait_url) VALUES ('user_2jQItOTuMusvHjORMeLVjPkjfEF', 'Simon', 'https://ca.slack-edge.com/TA01UCHBN-U068H00G83Z-a66138e76622-512');
+INSERT INTO users (id, name, portrait_url) VALUES ('user_2jQItOTuMusvHjORMeLVjPkjfEF', 'Simon', 'https://cdn.pixabay.com/photo/2012/09/09/01/56/seal-56468_960_720.jpg');
 INSERT INTO users (id, name, portrait_url) VALUES ('2', 'Alice', 'https://ca.slack-edge.com/TA01UCHBN-U06SCMV1RUP-6c1a7224a5c7-512');
 INSERT INTO users (id, name, portrait_url) VALUES ('3', 'Bob', 'https://ca.slack-edge.com/TA01UCHBN-U06TG2P5L80-9509cd9eb3a9-512');
 INSERT INTO users (id, name, portrait_url) VALUES ('4', 'Sara', 'https://tailwindcss.com/_next/static/media/sarah-dayan.de9b3815.jpg');
